@@ -2,6 +2,7 @@
 
 #main
 package-lock.json
+firebase.js
 
 # dependencies
 /node_modules
