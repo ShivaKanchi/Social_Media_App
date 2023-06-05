@@ -1,25 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import Posts from './components/Posts/Posts';
+import { db, getPosts, getPostsWithId } from './database/firebase';
+
 
 function App() {
 
-  const [posts] = useState([
-    {
-      username: "Shiva Kanchi",
-      caption: "Hello",
-      imageUrl: "https://images.pexels.com/photos/88212/pexels-photo-88212.jpeg"
-    },
-    {
-      username: "Abhishek Vishwakarama",
-      caption: "What",
-      imageUrl: "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg"
-    }, {
-      username: "Chetan Singh",
-      caption: "yeay",
-      imageUrl: "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg"
-    }
-  ]);
+  const [posts, setPosts] = useState();
+
+  useEffect(() => {
+    getPosts(db).then(data => setPosts(data))
+    getPostsWithId(db).then(data => console.log(data))
+  }, [])
+
+  console.log(posts)
 
   return (
     <div className="App">
@@ -32,7 +26,7 @@ function App() {
       </div>
 
       {
-        posts.map((post, index) => <Posts key={index} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />)
+        posts?.map((post, index) => <Posts key={index} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />)
       }
 
     </div>
