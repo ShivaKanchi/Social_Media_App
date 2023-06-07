@@ -35,6 +35,7 @@ function App() {
     setOpen(true)
     event.preventDefault()
   }
+
   const logIn = (event) => {
     event.preventDefault()
     login(email, password)
