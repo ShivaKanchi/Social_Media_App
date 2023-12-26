@@ -3,6 +3,7 @@
 #main
 package-lock.json
 firebase.js
+.env
 
 # dependencies
 /node_modules
