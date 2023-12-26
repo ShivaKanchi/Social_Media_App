@@ -2,7 +2,7 @@
 
 #main
 package-lock.json
-firebase.js
+# firebase.js
 .env
 
 # dependencies
