@@ -1,7 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, getAuth, updateProfile } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -15,7 +15,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth();
+const auth = getAuth(app);
+const storage = getStorage(app);
 
 async function getPosts(db) {
   const postsCol = collection(db, "posts");
@@ -34,14 +35,27 @@ async function getPostsWithId(db) {
   return post;
 }
 
-async function login(email, password) {
-  let status = await createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-    console.log(error.message);
+async function signUpUser(email, password, username) {
+  try {
+    const authUser = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(authUser.user, { displayName: username });
+    return authUser;
+  } catch (error) {
     alert(error.message);
-  });
-  console.log(status);
-
-  return status;
+  }
 }
 
-export { db, getPosts, getPostsWithId, login };
+async function logInUser(email, password) {
+  try {
+    const authUser = await signInWithEmailAndPassword(auth, email, password);
+    return authUser;
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+async function logOutUser() {
+  await signOut(auth);
+}
+
+export { db, auth, storage, getPosts, getPostsWithId, signUpUser, logInUser, logOutUser };

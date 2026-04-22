@@ -32,4 +32,4 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+}.app__loginToUpload { text-align: center; margin: 20px; }
