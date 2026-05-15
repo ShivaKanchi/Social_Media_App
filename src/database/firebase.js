@@ -24,7 +24,7 @@ async function signUpUser(email, password, username) {
     await updateProfile(authUser.user, { displayName: username });
     return authUser;
   } catch (error) {
-    alert(error.message);
+    alert("Sign up failed. Please try again.");
   }
 }
 
@@ -33,7 +33,7 @@ async function logInUser(email, password) {
     const authUser = await signInWithEmailAndPassword(auth, email, password);
     return authUser;
   } catch (error) {
-    alert(error.message);
+    alert("Login failed. Please check your credentials and try again.");
   }
 }
 
