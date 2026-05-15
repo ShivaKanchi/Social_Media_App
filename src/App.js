@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Posts from "./components/Posts/Posts";
 import { db, auth, signUpUser, logInUser, logOutUser } from "./database/firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { Box, Button, Input, Modal } from "@mui/material";
 import ImageUpload from "./components/ImageUpload/ImageUpload";
@@ -42,7 +42,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+    const q = query(collection(db, "posts"), orderBy("timestamp", "desc"), limit(20));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setPosts(
         snapshot.docs.map((doc) => ({
