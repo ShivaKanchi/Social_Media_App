@@ -33,8 +33,7 @@ function ImageUpload({ username }) {
             },
             (error) => {
                 // Error function ...
-                console.log(error);
-                alert(error.message);
+                alert("An error occurred while uploading the image. Please try again.");
             },
             () => {
                 // complete function ...
