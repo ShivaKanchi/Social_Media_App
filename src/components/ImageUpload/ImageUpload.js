@@ -26,9 +26,9 @@ function ImageUpload({ username }) {
             "state_changed",
             (snapshot) => {
                 // progress function ...
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
+                const progress = snapshot.totalBytes > 0
+                    ? Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+                    : 0;
                 setProgress(progress);
             },
             (error) => {
