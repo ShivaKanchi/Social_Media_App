@@ -14,7 +14,10 @@ function Posts({ postId, user, username, caption, imageUrl }) {
             const commentsRef = collection(db, "posts", postId, "comments");
             const q = query(commentsRef, orderBy('timestamp', 'asc'));
             unsubscribe = onSnapshot(q, (snapshot) => {
-                setComments(snapshot.docs.map((doc) => doc.data()));
+                setComments(snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                })));
             });
         }
 
@@ -52,8 +55,8 @@ function Posts({ postId, user, username, caption, imageUrl }) {
             <h4 className='post__text'> <strong>{username}</strong> {caption}</h4>
 
             <div className="post__comments">
-                {comments.map((comment, index) => (
-                    <p key={index}>
+                {comments.map((comment) => (
+                    <p key={comment.id}>
                         <strong>{comment.username}</strong> {comment.text}
                     </p>
                 ))}

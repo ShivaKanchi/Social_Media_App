@@ -18,23 +18,6 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-async function getPosts(db) {
-  const postsCol = collection(db, "posts");
-  const postSnapsot = await getDocs(postsCol);
-  const postList = postSnapsot.docs.map((doc) => doc.data());
-  return postList;
-}
-
-async function getPostsWithId(db) {
-  const postCol = collection(db, "posts");
-  const postSnapsot = await getDocs(postCol);
-  const post = postSnapsot.docs.map((doc) => ({
-    id: doc.id,
-    post: doc.data(),
-  }));
-  return post;
-}
-
 async function signUpUser(email, password, username) {
   try {
     const authUser = await createUserWithEmailAndPassword(auth, email, password);
@@ -58,4 +41,4 @@ async function logOutUser() {
   await signOut(auth);
 }
 
-export { db, auth, storage, getPosts, getPostsWithId, signUpUser, logInUser, logOutUser };
+export { db, auth, storage, signUpUser, logInUser, logOutUser };
