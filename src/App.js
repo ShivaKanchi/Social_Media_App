@@ -7,6 +7,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Box, Button, Input, Modal } from "@mui/material";
 import ImageUpload from "./components/ImageUpload/ImageUpload";
 
+const INSTAGRAM_LOGO_URL = "https://www.bananaip.com/wp-content/uploads/2016/11/Instagram_logo.svg_.png";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -74,7 +76,7 @@ function App() {
         <Box sx={style}>
           <form className="app__signup">
             <center>
-              <img className="app__headerImage" src="https://www.bananaip.com/wp-content/uploads/2016/11/Instagram_logo.svg_.png" alt="Logo" />
+              <img className="app__headerImage" src={INSTAGRAM_LOGO_URL} alt="Logo" />
             </center>
             <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -88,7 +90,7 @@ function App() {
         <Box sx={style}>
           <form className="app__signup">
             <center>
-              <img className="app__headerImage" src="https://www.bananaip.com/wp-content/uploads/2016/11/Instagram_logo.svg_.png" alt="Logo" />
+              <img className="app__headerImage" src={INSTAGRAM_LOGO_URL} alt="Logo" />
             </center>
             <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -98,7 +100,7 @@ function App() {
       </Modal>
 
       <div className="app__header">
-        <img className="app__headerImage" src="https://www.bananaip.com/wp-content/uploads/2016/11/Instagram_logo.svg_.png" alt="Logo" />
+        <img className="app__headerImage" src={INSTAGRAM_LOGO_URL} alt="Logo" />
 
         {user ? (
           <Button onClick={logOutUser}>Log Out</Button>
