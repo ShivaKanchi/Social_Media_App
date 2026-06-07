@@ -25,16 +25,6 @@ async function getPosts(db) {
   return postList;
 }
 
-async function getPostsWithId(db) {
-  const postCol = collection(db, "posts");
-  const postSnapsot = await getDocs(postCol);
-  const post = postSnapsot.docs.map((doc) => ({
-    id: doc.id,
-    post: doc.data(),
-  }));
-  return post;
-}
-
 async function signUpUser(email, password, username) {
   try {
     const authUser = await createUserWithEmailAndPassword(auth, email, password);
@@ -58,4 +48,4 @@ async function logOutUser() {
   await signOut(auth);
 }
 
-export { db, auth, storage, getPosts, getPostsWithId, signUpUser, logInUser, logOutUser };
+export { db, auth, storage, getPosts, signUpUser, logInUser, logOutUser };
